@@ -12,8 +12,8 @@ fun Route.customerRouting(
 ) {
     route("/customer"){
         get {
-            val customerList=db.getAllCustomer()
-            call.respond(customerList)
+            val customer=db.getAllCustomer()
+            call.respond(customer)
         }
         post {
             val customer = call.receive<Customer>()

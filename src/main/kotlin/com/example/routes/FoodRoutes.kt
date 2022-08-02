@@ -10,8 +10,8 @@ import io.ktor.server.routing.*
 fun Route.foodRouting(db:DatabaseFactory) {
     route("/food") {
         get {
-            val foodList=db.getAllFood()
-            call.respond(foodList)
+            val foods=db.getAllFood()
+            call.respond(foods)
         }
         post {
             val food = call.receive<Food>()

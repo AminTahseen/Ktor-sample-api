@@ -8,7 +8,7 @@ import org.bson.types.ObjectId
 data class Order (
     @BsonId
     val id: String?= ObjectId().toString(),
-    val foodId:String,
-    val quantity:String,
+    val food:List<OrderedItem>,
     val customerId:String
     )
+

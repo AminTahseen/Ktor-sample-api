@@ -20,5 +20,10 @@ fun Route.orderRouting(
             val storedOrder=db.addOrder(order)
             call.respond(storedOrder)
         }
+        get("/findCustomerOrder/{id}") {
+            val id=call.parameters["id"]
+            val orderResponse= db.getCustomerOrder(id.toString())
+            call.respond(orderResponse)
+        }
     }
 }
