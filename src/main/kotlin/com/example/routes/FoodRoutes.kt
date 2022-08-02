@@ -1,27 +1,22 @@
 package com.example.routes
 
-import com.example.models.Customer
 import com.example.models.Food
-import com.example.models.foodStorage
-import io.ktor.http.*
+import com.example.repository.DatabaseFactory
 import io.ktor.server.application.*
 import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 
-fun Route.foodRouting() {
+fun Route.foodRouting(db:DatabaseFactory) {
     route("/food") {
         get {
-            if (foodStorage.isNotEmpty()) {
-                call.respond(foodStorage)
-            } else {
-                call.respondText("No foods found", status = HttpStatusCode.OK)
-            }
+            val foodList=db.getAllFood()
+            call.respond(foodList)
         }
         post {
             val food = call.receive<Food>()
-            foodStorage.add(food)
-            call.respondText("Food stored correctly", status = HttpStatusCode.Created)
+            val storedFood=db.addFood(food)
+            call.respond(storedFood)
         }
     }
 }
